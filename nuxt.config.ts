@@ -4,9 +4,9 @@ export default defineNuxtConfig({
   modules: [
     'nuxt-icon',
     '@nuxtjs/tailwindcss',
-    '@nuxtjs/supabase',
+    // '@nuxtjs/supabase',
     '@pinia/nuxt',
     '@vite-pwa/nuxt'
   ],
-  devtools: {enabled: true }
+  devtools: {enabled: false }
 })
