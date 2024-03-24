@@ -8,5 +8,5 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@vite-pwa/nuxt'
   ],
-  devtools: {enabled: true }
+  devtools: {enabled: false }
 })
