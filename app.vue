@@ -1,7 +1,11 @@
 <template>
-  <div className="bg-black fixed w-[calc(100%+1px)] h-full">
+
+  <div class=" fixed w-[calc(100%+1px)] h-full">
     <NuxtPage />
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { useUserStore } from '~/stores/user';
+const userStore = useUserStore()
+</script>
