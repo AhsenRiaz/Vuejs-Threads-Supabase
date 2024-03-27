@@ -9,6 +9,14 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "@vite-pwa/nuxt",
   ],
+  supabase:{
+    url:process.env.SUPABASE_URL,
+    key:process.env.SUPABASE_ANON_KEY,
+    redirectOptions:{
+      login:'/login',
+      callback:'/'
+    }
+  },
   runtimeConfig: {
     public: {
       BUCKET_URL: process.env.BUCKET_URL,
