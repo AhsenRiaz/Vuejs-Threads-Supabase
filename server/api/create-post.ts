@@ -14,4 +14,6 @@ export default defineEventHandler(async (event) => {
             picture: body.picture
         }
     });
+
+    return response;
 })

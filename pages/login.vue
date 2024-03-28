@@ -12,13 +12,18 @@ import {useUserStore} from '~/stores/user'
 const client = useSupabaseClient()
 const user = useSupabaseUser()
 
+watchEffect(() => {
+  if(user.value){
+    navigateTo('/')
+  }
+})
+
 const login = async (prov) => {
   const { data, error } = await client.auth.signInWithOAuth({
     provider: prov,
-    redirectTo: window.location.origin
   })
 
   if (error) console.log(error)
-}
+};
 
 </script>
