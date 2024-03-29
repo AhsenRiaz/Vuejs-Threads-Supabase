@@ -12,10 +12,17 @@ import { onBeforeMount } from "vue";
 import Create from "~/components/Create.vue";
 
 const userStore = useUserStore();
+const user = useSupabaseUser()
 
 let posts = ref([]);
 let isPosts = ref(false);
 let isLoading = ref(false);
+
+watchEffect(() => {
+  if(!user.value){
+    navigateTo('/login')
+  }
+})
 
 onBeforeMount(async () => {
   try {
