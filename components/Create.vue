@@ -7,11 +7,7 @@
       </div>
       <div class="w-full flex flex-col justify-between">
         <div class="">
-          <img
-            class="mx-auto w-full max-h-20 mt-2 mr-2 rounded-lg"
-            :src="fileDisplay"
-            alt="Image"
-          />
+          <img class="mx-auto w-full max-h-20 mt-2 mr-2 rounded-lg" :src="fileDisplay" alt="Image" />
         </div>
         <Input ref="file" type="file" @input="selectImage" />
       </div>
@@ -54,17 +50,16 @@ const createPost = async () => {
   isLoading.value = true;
 
   if (fileData.value) {
-    const { data, error } = client.storage
+    const response = await client.storage
       .from("thread")
       .upload(`${uuidv4()}.jpg`, fileData.value);
 
-    dataOut = data;
-    console.log("dataOut", dataOut);
-    errorOut = error;
+    dataOut = response.data;
+    errorOut = response.error ;
   }
 
   if (errorOut) {
-    console.log(errorOut);
+    console.log(errorOut.message);
     return errorOut;
   }
 
