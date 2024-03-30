@@ -1,8 +1,15 @@
 <template>
   <div class="container border p-20">
     <Create />
-    <div v-if="isPosts" v-for="(post, index) in posts" class="gap-x-4">
-      <Post :post="post" />
+    <div
+      v-if="isPosts"
+      v-for="(post, index) in posts.sort((a, b) => a.createdAt > b.createdAt)"
+      class="gap-x-4"
+    >
+      <Post :post="post" @isDeleted="userStore.getAllPosts()" />
+    </div>
+    <div v-else>
+      <p>Loading...</p>
     </div>
   </div>
 </template>
@@ -12,17 +19,17 @@ import { onBeforeMount } from "vue";
 import Create from "~/components/Create.vue";
 
 const userStore = useUserStore();
-const user = useSupabaseUser()
+const user = useSupabaseUser();
 
 let posts = ref([]);
 let isPosts = ref(false);
 let isLoading = ref(false);
 
 watchEffect(() => {
-  if(!user.value){
-    navigateTo('/login')
+  if (!user.value) {
+    navigateTo("/login");
   }
-})
+});
 
 onBeforeMount(async () => {
   try {
@@ -36,20 +43,9 @@ onBeforeMount(async () => {
 
 onMounted(() => {
   watchEffect(() => {
-    console.log("userStore.posts", userStore.posts);
+    console.log("added post");
     posts.value = userStore.posts;
     isPosts.value = true;
   });
 });
-
-watch(
-  () => posts.value,
-  () => {
-    if (userStore.posts && userStore.posts.length >= 1) {
-      posts.value = userStore.posts;
-      isPosts.value = true;
-    }
-  },
-  { deep: true }
-);
 </script>

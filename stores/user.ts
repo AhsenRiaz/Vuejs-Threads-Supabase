@@ -14,5 +14,6 @@ export const useUserStore = defineStore("user", {
       console.log("this.posts", this.posts)
       return res.data;
     },
+    
   },
 });
